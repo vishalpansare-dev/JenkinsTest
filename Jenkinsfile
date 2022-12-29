@@ -67,20 +67,18 @@ pipeline {
 		vari = ""
 	}
 	agent any
-	stages {
-		stage ("Example") {
-			steps {
-				script{
-					echo 'Hello'
-					echo "${params.Env}"
-					echo "${params.Server}"
-					if (params.Server.equals("Could not get Environment from Env Param")) {
-						echo "Must be the first build after Pipeline deployment.  Aborting the build"
-						currentBuild.result = 'ABORTED'
-						return
-					}
-					echo "Crossed param validation"
-				} }
+	
+	node('slave') {
+		def choice1
+		def choice2
+		
+		stage ('Select'){
+			choice1 = input( id: 'userInput', message: 'Select your choice', parameters: [ [$class: 'ChoiceParameterDefinition', choices: 'aa\nbb', description: '', name: ''] ])
+			if(choice1.equals("aa")){
+				choice2 = input( id: 'userInput', message: 'Select your choice', parameters: [ [$class: 'ChoiceParameterDefinition', choices: 'yy\nww', description: '', name: ''] ])
+			}else{
+				choice2 = input( id: 'userInput', message: 'Select your choice', parameters: [ [$class: 'ChoiceParameterDefinition', choices: 'gg\nkk', description: '', name: ''] ])
+			}
 		}
 	}
 }
