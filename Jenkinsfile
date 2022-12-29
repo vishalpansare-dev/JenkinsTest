@@ -39,7 +39,7 @@ pipeline {
 		disableConcurrentBuilds()
 		timestamps()
 		timeout(time: 30, unit: 'MINUTES')
-		ansiColor('xterm')
+//		ansiColor('xterm')
 	}
 	parameters {
 		choice(name: 'ENVIRONMENT', choices: "${environments}")
