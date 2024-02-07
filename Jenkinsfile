@@ -48,6 +48,7 @@ pipeline {
 		stage("Run Tests") {
 			steps {
 				sh "echo SUCCESS on ${params.ENVIRONMENT}"
+				emailext body: '', subject: 'test', to: 'vishalpansare111@gmail.com'
 			}
 		}
 	}
