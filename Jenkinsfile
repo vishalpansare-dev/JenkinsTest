@@ -1,55 +1,33 @@
-environments = 'lab\nstage\npro'
-
-properties([
-		parameters([
-				[$class: 'CascadeChoiceParameter',
-				 choiceType: 'PT_SINGLE_SELECT',
-				 description: 'Select a choice',
-				 filterLength: 1,
-				 filterable: true,
-				 name: 'choice1',
-				 referencedParameters: 'ENVIRONMENT',
-				 script: [$class: 'GroovyScript',
-				          fallbackScript: [
-						          classpath: [],
-						          sandbox: true,
-						          script: 'return ["ERROR"]'
-				          ],
-				          script: [
-						          classpath: [],
-						          sandbox: true,
-						          script: """
-                        if (ENVIRONMENT == 'lab') {
-                            return['aaa','bbb']
-                        }
-                        else {
-                            return['ccc', 'ddd']
-                        }
-                    """.stripIndent()
-				          ]
-				 ]
-				]
-		])
-])
-
+def jobs = ["JobA", "JobB", "JobC"]
+ 
+def parallelStagesMap = jobs.collectEntries {
+    ["${it}" : generateStage(it)]
+}
+ 
+def generateStage(job) {
+    return {
+        stage("stage: ${job}") {
+                echo "This is ${job}."
+        }
+    }
+}
+ 
 pipeline {
-	agent any
-	
-	options {
-		disableConcurrentBuilds()
-		timestamps()
-		timeout(time: 30, unit: 'MINUTES')
-//		ansiColor('xterm')
-	}
-	parameters {
-		choice(name: 'ENVIRONMENT', choices: "${environments}")
-	}
-	stages {
-		stage("Run Tests") {
-			steps {
-				sh "echo SUCCESS on ${params.ENVIRONMENT}"
-				emailext body: '', subject: 'test', to: 'vishalpansare111@gmail.com'
-			}
-		}
-	}
+    agent none
+ 
+    stages {
+        stage('non-parallel stage') {
+            steps {
+                echo 'This stage will be executed first.'
+            }
+        }
+ 
+        stage('parallel stage') {
+            steps {
+                script {
+                    parallel parallelStagesMap
+                }
+            }
+        }
+    }
 }
