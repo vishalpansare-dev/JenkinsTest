@@ -11,6 +11,8 @@ def generateStage(job) {
         }
      stage("stage1: ${job}") {
                 echo "This is ${job}. 1"
+      cleanWs()
+      git(url: 'https://github.com/vishalpansare-dev/JenkinsTest.git', branch: 'main')
       sh "mkdir ${job}"
       ws(job){
        sh "pwd"
