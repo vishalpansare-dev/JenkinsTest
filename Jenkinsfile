@@ -11,6 +11,9 @@ def generateStage(job) {
         }
      stage("stage1: ${job}") {
                 echo "This is ${job}. 1"
+      ws(){
+       sh 'dir'
+      }
         }
     }
 }
