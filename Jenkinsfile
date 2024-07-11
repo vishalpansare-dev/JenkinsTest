@@ -17,6 +17,10 @@ def generateStage(job) {
        deleteDir()
        checkout scm
        sh "pwd"
+      steps {
+                script {
+                    echo 'parallelStagesMap'
+                }
       }
         }
     }
