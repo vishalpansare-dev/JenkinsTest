@@ -9,6 +9,9 @@ def generateStage(job) {
         stage("stage: ${job}") {
                 echo "This is ${job}."
         }
+     stage("stage1: ${job}") {
+                echo "This is ${job}. 1"
+        }
     }
 }
  
