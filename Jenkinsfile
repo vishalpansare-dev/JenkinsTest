@@ -1,4 +1,4 @@
-def jobs = ["JobA"]
+def jobs = ["JobA","JobB","JobC"]
  
 def parallelStagesMap = jobs.collectEntries {
     ["${it}" : generateStage(it)]
@@ -16,6 +16,7 @@ def generateStage(job) {
       dir(job){
        checkout scm
        sh "pwd"
+       sh "gradle clean"
       }
         }
     }
