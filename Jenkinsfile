@@ -14,8 +14,7 @@ def generateStage(job) {
     
       sh "mkdir ${job}"
       ws(job){
-       sh "pwd"
-       git(url: 'https://github.com/vishalpansare-dev/JenkinsTest.git', branch: 'main')
+       sh "git clone https://github.com/vishalpansare-dev/JenkinsTest.git"
        sh "pwd"
       }
         }
