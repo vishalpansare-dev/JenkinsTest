@@ -20,7 +20,7 @@ def generateStage(job) {
 }
  
 pipeline {
-    agent none
+    agent any
  
     stages {
         stage('non-parallel stage') {
