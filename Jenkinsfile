@@ -17,7 +17,6 @@ def generateStage(job) {
        deleteDir()
        checkout scm
        sh "pwd"
-       sh "gradlew clean"
       }
         }
     }
