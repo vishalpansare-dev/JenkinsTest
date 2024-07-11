@@ -13,7 +13,7 @@ def generateStage(job) {
                 echo "This is ${job}. 1"
     
       sh "mkdir ${job}"
-      ws(job){
+      dir(job){
        sh "git clone https://github.com/vishalpansare-dev/JenkinsTest.git"
        sh "pwd"
       }
