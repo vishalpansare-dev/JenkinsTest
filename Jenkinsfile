@@ -1,4 +1,4 @@
-def jobs = ["JobA", "JobB", "JobC"]
+def jobs = ["JobA"]
  
 def parallelStagesMap = jobs.collectEntries {
     ["${it}" : generateStage(it)]
