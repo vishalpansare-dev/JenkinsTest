@@ -16,7 +16,7 @@ def generateStage(job) {
       sh "mkdir ${job}"
       ws(job){
        sh "pwd"
-       checkout scm
+       git(url: 'https://github.com/vishalpansare-dev/JenkinsTest.git', branch: 'main')
        sh "pwd"
       }
         }
