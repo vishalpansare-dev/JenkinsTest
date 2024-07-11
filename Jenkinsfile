@@ -11,7 +11,7 @@ def generateStage(job) {
         }
      stage("stage1: ${job}") {
                 echo "This is ${job}. 1"
-      cleanWs()
+    
       sh "mkdir ${job}"
       ws(job){
        sh "pwd"
