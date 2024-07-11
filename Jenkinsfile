@@ -14,7 +14,7 @@ def generateStage(job) {
       sh "mkdir ${job}"
       ws(job){
        sh "pwd"
-       scm checkout
+       checkout scm
        sh "pwd"
       }
         }
