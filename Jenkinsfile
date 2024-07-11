@@ -13,7 +13,7 @@ def generateStage(job) {
                 echo "This is ${job}. 1"
       sh "mkdir ${job}"
       ws("${job}"){
-       echo sh 'dir'
+       scm checkout
       }
         }
     }
